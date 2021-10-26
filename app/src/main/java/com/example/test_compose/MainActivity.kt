@@ -22,14 +22,73 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TestComposeTheme {
-                MyApp()
+                Example1()
             }
         }
     }
 }
 
 @Composable
-fun MyApp() {
+fun Example1() {
+    var count = remember { mutableStateOf(0) }
+    Card(modifier = Modifier.padding(20.dp), elevation = 10.dp) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text("You clicked ${count.value} times")
+
+            Button(
+                modifier = Modifier.padding(vertical = 24.dp),
+                onClick = { count.value-- },
+                enabled = count.value > 0,
+            ) {
+                Text("Decrease")
+            }
+
+            Button(
+                onClick = { count.value++ }
+            ) {
+                Text("Increase")
+            }
+        }
+    }
+}
+
+@Preview()
+@Composable
+fun DefaultPreview() {
+    TestComposeTheme {
+        Example1()
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@Composable
+fun Example2() {
     var isNext by remember { mutableStateOf(false) }
 
     if (!isNext) {
@@ -42,11 +101,14 @@ fun MyApp() {
 @Composable
 fun Main() {
     val list: List<String> = listOf(
-        "Buy a phone",
+        "Final java task",
         "Complete deadline",
         "Create video on YTB",
         "Meeting",
-        "Online learning"
+        "Online learning",
+        "Review project",
+        "Report code",
+        "Learn Flutter"
     )
 
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
@@ -140,13 +202,5 @@ fun SnowboardingScreen(onContinueClicked: () -> Unit) {
                 Text("Continue")
             }
         }
-    }
-}
-
-@Preview()
-@Composable
-fun DefaultPreview() {
-    TestComposeTheme {
-        MyApp()
     }
 }
